@@ -1,6 +1,6 @@
 class Bob
   def hey(input)
-    remark = Remark.new input
+    remark = Remark.new input.to_s
     if remark.nothing?
       'Fine. Be that way.'
     elsif remark.yelling?
@@ -12,22 +12,17 @@ class Bob
     end
   end
 
-  class Remark
-    attr_reader :remark
-    def initialize(remark)
-      @remark = remark
-    end
-
+  class Remark < String
     def nothing?
-      remark.to_s.empty?
+      self.empty?
     end
 
     def yelling?
-      remark.upcase == remark
+      self.upcase == self
     end
 
     def question?
-      remark.end_with? '?'
+      self.end_with? '?'
     end
   end
 end
