@@ -1,5 +1,5 @@
 class DNA < String
   def to_rna
-    'C'
+    self.gsub(/T/, 'U')
   end
 end
