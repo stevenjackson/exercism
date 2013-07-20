@@ -1,7 +1,7 @@
 class Phrase < String
 
   def word_count
-    Hash[scan(/\w+/).group_by {|w|w}.map{|w, total| [w, total.length] }]
+    Hash[scan(/\w+/).map{|w|w.downcase}.group_by{|w|w}.map{|w, occurences| [w, occurences.length] }]
   end
 
 end

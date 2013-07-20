@@ -35,7 +35,6 @@ class PhraseTest < MiniTest::Unit::TestCase
   end
 
   def test_normalize_case
-    skip
     phrase = Phrase.new("go Go GO")
     counts = {"go" => 3}
     assert_equal counts, phrase.word_count
