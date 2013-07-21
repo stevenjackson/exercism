@@ -11,9 +11,7 @@ class Phrase < String
   class Histogram < Hash
     def initialize(words)
       super 0
-      words.each do |word|
-        self[word] += 1
-      end
+      words.each { |word| self[word] += 1 }
     end
   end
 
