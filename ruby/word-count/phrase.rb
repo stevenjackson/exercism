@@ -11,21 +11,11 @@ class Phrase < String
   end
 
   class Histogram < Hash
-    attr_accessor :list
     def initialize(phrase)
-      store_counts phrase
-    end
-
-    def store_counts(phrase)
-      self.list = phrase.words.group_by do |word| 
-        word
-      end.map do |word, words|
-        [word, words.length]
+      super 0
+      phrase.words.each do |word|
+        [word] += 1
       end
-    end
-
-    def to_h
-      Hash[list]
     end
   end
 
