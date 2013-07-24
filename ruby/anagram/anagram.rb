@@ -2,8 +2,16 @@ class Anagram < String
 
   def match(words)
     words.select do |word|
-      Histogram.new(self) == Histogram.new(word)
+      anagram? word
     end
+  end
+
+  def anagram?(word)
+    histogram == Histogram.new(word)
+  end
+
+  def histogram
+    @histogram ||= Histogram.new(self)
   end
 
   class Histogram < Hash
