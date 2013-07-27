@@ -1,9 +1,7 @@
 class Anagram < String
 
   def match(words)
-    words.select do |word|
-      anagram? word
-    end
+    words.select { |word| anagram? word }
   end
 
   def anagram?(word)
