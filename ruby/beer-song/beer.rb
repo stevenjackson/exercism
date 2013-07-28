@@ -4,14 +4,12 @@ class Beer
     Verse.new(Wall.new(num)).to_s
   end
 
-  def sing(start_bottles, end_bottles=0)
-    verses(start_bottles, end_bottles).join("\n") << "\n"
+  def sing(start_at, end_at=0)
+    verses(start_at, end_at).join("\n") << "\n"
   end
 
-  def verses(start_bottles, end_bottles)
-    start_bottles.downto(end_bottles).map do |bottles|
-      verse(bottles)
-    end
+  def verses(start_at, end_at)
+    start_at.downto(end_at).map { |num| verse(num) }
   end
 
   class Wall
@@ -43,11 +41,11 @@ class Beer
     end
 
     def to_s
-      line1.capitalize << line2.capitalize
+      [line1, line2].map(&:capitalize).join("\n") << "\n"
     end
 
     def line1
-      "#{bottles_on_wall}, #{bottles_of_beer}.\n"
+      "#{bottles_on_wall}, #{bottles_of_beer}."
     end
 
     def line2
@@ -61,10 +59,10 @@ class Beer
     end
 
     def take_and_pass
-      "#{take_phrase} and pass it around, #{bottles_on_wall}.\n"
+      "#{take_one} and pass it around, #{bottles_on_wall}."
     end
 
-    def take_phrase
+    def take_one
       if(wall.bottles?)
         'Take one down'
       else
@@ -73,7 +71,7 @@ class Beer
     end
 
     def buy_some_more
-      "Go to the store and buy some more, #{bottles_on_wall}.\n"
+      "Go to the store and buy some more, #{bottles_on_wall}."
     end
 
     def bottles_on_wall
