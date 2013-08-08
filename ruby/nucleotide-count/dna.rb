@@ -5,8 +5,8 @@ module Nucleotide
   THYMIDINE = 'T'
   URACIL    = 'U'
 
-  def self.nucleotide?(string)
-    constants.any? { |const| const_get(const) == string }
+  def nucleotide?(molecule)
+    [ADENOSINE, CYTIDINE, GUANOSINE, THYMIDINE, URACIL].include? molecule
   end
 end
 
@@ -20,7 +20,7 @@ class DNA
   end
 
   def count(nucleotide)
-    raise ArgumentError unless Nucleotide.nucleotide? nucleotide
+    raise ArgumentError unless nucleotide? nucleotide
     sequence.count(nucleotide)
   end
 
