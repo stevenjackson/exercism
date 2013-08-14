@@ -5,32 +5,34 @@ module Nucleotide
   THYMIDINE = 'T'
   URACIL    = 'U'
 
+  def nucleotides
+    [ADENOSINE, CYTIDINE, GUANOSINE, THYMIDINE, URACIL]
+  end
+
   def nucleotide?(molecule)
-    [ADENOSINE, CYTIDINE, GUANOSINE, THYMIDINE, URACIL].include? molecule
+    nucleotides.include? molecule
+  end
+
+  def count_molecules(sequence, molecules)
+    molecules.each_with_object(Hash.new(0)) do |molecule, counts|
+      counts[molecule] = sequence.count molecule
+    end
   end
 end
 
 class DNA
   include Nucleotide
 
-  attr_reader :sequence
+  NUCLEOTIDES = [ADENOSINE, CYTIDINE, GUANOSINE, THYMIDINE]
+  attr_reader :nucleotide_counts
 
   def initialize(sequence)
-    @sequence = sequence
+    @nucleotide_counts = count_molecules(sequence, DNA::NUCLEOTIDES)
   end
 
   def count(nucleotide)
     raise ArgumentError unless nucleotide? nucleotide
-    sequence.count(nucleotide)
-  end
-
-  def nucleotide_counts
-    @nucleotide_counts ||= {
-      ADENOSINE => count(ADENOSINE),
-      THYMIDINE => count(THYMIDINE),
-      CYTIDINE => count(CYTIDINE),
-      GUANOSINE => count(GUANOSINE)
-    }
+    nucleotide_counts[nucleotide]
   end
 
 end
