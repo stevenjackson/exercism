@@ -6,7 +6,11 @@ package leap
 // testVersion should match the targetTestVersion in the test file.
 const testVersion = 2
 
-// It's good style to write a comment here documenting IsLeapYear.
-func IsLeapYear(int) bool {
-	// Write some code here to pass the test suite.
+// IsLeapYear determines if the given year is a leap year.
+func IsLeapYear(year int) bool {
+	fourthYear := year%4 == 0
+	centuryYear := year%100 == 0
+	fourthCentury := year%400 == 0
+
+	return fourthYear && !centuryYear || fourthCentury
 }
